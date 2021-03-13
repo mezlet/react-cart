@@ -5,8 +5,6 @@ const AppContext = createContext();
 
 const AppProvider = ({children}) => {
     const value = useCombineReducer();
-    useEffect(() => {
-    }, []);
     return (
         <AppContext.Provider value = {value}>
             {children}

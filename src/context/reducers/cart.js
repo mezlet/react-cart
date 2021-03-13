@@ -1,9 +1,8 @@
-
+import * as types from '../actions/action_types';
 export const cartInitialState = {
     showDrawer: false,
     cart: [],
     products: [],
-    error: null,
     total: 0,
     currency: 'USD',
     currencies: [],
@@ -11,60 +10,29 @@ export const cartInitialState = {
 
 
 export const cartReducer = (state= cartInitialState, action) => {
-    if(action.type === 'TOGGLE_DRAWER') {
-        return { 
-            ...state,
-            showDrawer: !state.showDrawer
-        }  
-    }
-
-    if(action.type === 'PRODUCT_LIST') {
-        return {
-            ...state,
-            ... action.payload
-        }
-    }
-
-    if(action.type === 'ADD_ITEM') {
-        return {
-            ...state,
-            ...action.payload
-        }
-    }
-
-    if(action.type === 'INCREASE') {
-        return {
-            ...state,
-            cart: action.payload
-        }
-    }
-
-    if(action.type === 'DECREASE') {
-        return {
-            ...state,
-            ...action.payload
-        }
-    }
-
-    if(action.type === 'GET_TOTAL') {
-        return {
-            ...state,
-            ...action.payload
-        }
-    }
-
-    if(action.type === 'REMOVE_ITEM') {
-        return {
-            ...state,
-            ...action.payload
-        }
-    }
-
-    if(action.type === 'CHANGE_CURRENCY') {
-        return {
-            ...state,
-            ...action.payload
-        }
+    switch(action.type) {
+        case types.TOGGLE_DRAWER: 
+            return {
+                ...state,
+                showDrawer: !state.showDrawer
+            }
+        case types.INCREASE:
+            return {
+                ...state,
+                cart: action.payload 
+            }
+        case types.PRODUCT_LIST:
+        case types.ADD_ITEM:
+        case types.DECREASE:
+        case types.GET_TOTAL:
+        case types.REMOVE_ITEM:
+        case types.CHANGE_CURRENCY: 
+            return {
+                ...state,
+                ...action.payload
+            }
+        default: 
+            return state;
     }
 
 }
