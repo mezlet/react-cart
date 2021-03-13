@@ -1,9 +1,11 @@
-
+import React from 'react';
+import { AppProvider } from '../../../context/Provider';
+import { Cart } from '../Cart';
 function App() {
   return (
-    <div className="App">
-      <h1>hello</h1>
-    </div>
+    <AppProvider>
+      <Cart/>
+    </AppProvider>
   );
 }
 
