@@ -1,4 +1,4 @@
-export default {
+const queries =  {
     FETCH_PRODUCTS:(country) => `
     {
         products {
@@ -10,3 +10,5 @@ export default {
         currency
       }`
 }
+
+export default queries;

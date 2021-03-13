@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import BackDrop from '../../presentation/BackDrop';
 import { useCartDispatcher } from '../../../hooks/useCartDispatcher';
 import { useFetch } from '../../../hooks/useFetch';
 import CartHeader from '../../presentation/CartHeader';
@@ -9,7 +8,6 @@ import { Container } from 'react-bootstrap';
 const Cart = () => {
 	const { showDrawer, currency, cart, getProducts, subTotal, toggleDrawer } = useCartDispatcher();
 	const [loading, data, error] = useFetch();
-	let backdrop;
 
 	useEffect(() => {
 		if (data) {
@@ -25,11 +23,8 @@ const Cart = () => {
 		subTotal();
 	}, [cart]);
 
-	if (showDrawer) {
-		backdrop = <BackDrop toggleDrawer={toggleDrawer} />;
-	}
 	return (
-		<Container className='f-12 ' fluid>
+		<Container className='f-12' fluid>
 			<CartHeader cart={cart} />
 			<CartContainer error={error} loading={loading} showDrawer={showDrawer} toggleDrawer={toggleDrawer} />
 		</Container>

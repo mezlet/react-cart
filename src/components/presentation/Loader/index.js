@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
     return (
-        <div className='position-absolute bottom-50 end-50 p-5'>
+        <div className='d-flex justify-content-center'>
             <i className ='fas fa-spinner fa-spin  loader'></i>
 
         </div>
