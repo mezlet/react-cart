@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, Navbar } from 'react-bootstrap';
 
-const MainNav = ({ cart }) => {
+const MainNav = ({ cart, toggleDrawer }) => {
 	return (
 		<div className='f-12'>
 			<Navbar bg='' variant='' className='border-bottom'>
@@ -20,7 +20,7 @@ const MainNav = ({ cart }) => {
 				{/* <Nav> */}
 					<div className='text-secondary'>
 						<span className='mx-3'>Account</span>
-						<i className='fas fa-shopping-cart'></i>
+						<i className='fas fa-shopping-cart cursor' onClick={toggleDrawer}></i>
 						<span className='mt-n5 pt-n3'>{cart.length}</span>
 					</div>
 				{/* </Nav> */}
@@ -30,7 +30,8 @@ const MainNav = ({ cart }) => {
 };
 
 MainNav.propTypes = {
-	cart: PropTypes.array.isRequired
+	cart: PropTypes.array.isRequired,
+	toggleDrawer: PropTypes.func.isRequired
 }
 
 export default MainNav;

@@ -9,74 +9,53 @@ import {
 	changeProductCurrency
 } from '../actions/cart';
 
-export const increaseCount = (id, cartDispatch, cart) => {
-	const newCart = cart.map(item => {
-		if (item.id === id) {
-			item.count += 1;
-			item.total = item.price * item.count;
-			return item;
-		}
-		return item;
-	});
-	return cartDispatch(increase(newCart));
+export const increaseCount = (id, cartDispatch, cache) => {
+	const newCache = { ...cache, [id]: cache[id] + 1 };
+	return cartDispatch(increase({ cache: newCache }));
 };
 
-export const decreaseCount = (id, cartDispatch, cart, showDrawer) => {
-	let invalid = null;
-	let newCart = [];
-	const items = cart.map((item, index) => {
-		if (item.id === id) {
-			item.count -= 1;
-			if (item.count <= 0) {
-				invalid = index;
-			}
-			item.total = item.price * item.count;
-			return item;
-		}
-		return item;
-	});
-	if (invalid !== null) {
-		newCart = items.splice(invalid, 0);
-		return cartDispatch(decrease({ cart: newCart, showDrawer: !showDrawer }));
-	}
-	return cartDispatch(decrease({ cart: items }));
-};
-
-export const addItem = (selectedItem, cart, cartDispatch, showDrawer) => {
-	if (cart.length === 0) {
+export const decreaseCount = (id, cartDispatch, cart, cache, showDrawer) => {
+	let newCache;
+	const count = cache[id] - 1;
+	if (count === 0) {
+		const cartIndex = cart.findIndex(item => item.id === id);
+		const newCart = cart.splice(cartIndex, 0);
+		newCache = { ...cache };
+		delete newCache[id];
 		return cartDispatch(
-			addToCart({
-				cart: [...cart, { ...selectedItem, count: 1, total: selectedItem.price }],
+			decrease({
+				cart: newCart,
+				cache: newCache,
 				showDrawer: !showDrawer
 			})
 		);
 	}
-	const tempCart = [...cart, { ...selectedItem, count: 1, total: selectedItem.price }];
-	const items = tempCart.reduce((accumulator, current) => {
-		if (!accumulator[current.id]) {
-			accumulator[current.id] = current;
-		} else {
-			accumulator[current.id].count += 1;
-			const { price, count } = accumulator[current.id];
-			accumulator[current.id].total = price * count;
-		}
-		return accumulator;
-	}, {});
-	const newCart = Object.values(items);
+	newCache = { ...cache, [id]: cache[id] - 1 };
+	return cartDispatch(decrease({ cache: newCache }));
+};
+
+export const addItem = (selectedItem, cart, cache, cartDispatch, showDrawer) => {
+	if (cache[selectedItem.id]) {
+		return cartDispatch(
+			addToCart({
+				cache: { ...cache, [selectedItem.id]: cache[selectedItem.id] + 1 },
+				showDrawer: !showDrawer
+			})
+		);
+	}
 	return cartDispatch(
 		addToCart({
-			cart: newCart,
-			showDrawer: !showDrawer
+			cart: [...cart, { ...selectedItem }],
+			showDrawer: !showDrawer,
+			cache: { ...cache, [selectedItem.id]: 1 }
 		})
 	);
 };
 
-export const subTotal = (cart, cartDispatch) => {
+export const subTotal = (cart, cache, cartDispatch) => {
 	let { total } = cart.reduce(
 		(cartTotal, cartItem) => {
-			const { price, count } = cartItem;
-			const itemTotal = price * count;
-
+			const itemTotal = cartItem.price * cache[cartItem.id];
 			cartTotal.total += itemTotal;
 			return cartTotal;
 		},
@@ -94,10 +73,18 @@ export const deleteItem = (id, cart, cartDispatch, showDrawer) => {
 	if (newCart.length > 0) {
 		return cartDispatch(removeItem({ cart: newCart }));
 	}
+
 	return cartDispatch(removeItem({ cart: newCart, showDrawer: !showDrawer }));
 };
 
-export const drawerToggle = cartDispatch => cartDispatch(toggleDrawer());
+export const drawerToggle = (showDrawer, cartDispatch) => cartDispatch(toggleDrawer({ showDrawer: !showDrawer }));
 
-export const getProducts = (data, cartDispatch) => cartDispatch(productList(data));
-export const changeCurrency = (currency, cartDispatch) => cartDispatch(changeProductCurrency({currency}));
+export const getProducts = (data, cache, cartDispatch) => {
+	const cartItems = Object.keys(cache);
+	if(cartItems.length > 0) {
+		data.cart = data.products.filter(item => cartItems.includes(`${item.id}`));
+	}
+	return cartDispatch(productList(data));
+}
+
+export const changeCurrency = (currency, cartDispatch) => cartDispatch(changeProductCurrency({ currency }));

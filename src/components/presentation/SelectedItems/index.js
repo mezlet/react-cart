@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
-const SelectedItems = ({item, increase, decrease, removeItem, symbol }) => {
+const SelectedItems = ({item, increase, decrease, removeItem, symbol, cache }) => {
     return (
         <div className='bg-white my-2 p-3'>
             <div className='d-flex justify-content-between'>
@@ -18,10 +18,10 @@ const SelectedItems = ({item, increase, decrease, removeItem, symbol }) => {
             <div className='d-flex my-3'>
                 <ButtonGroup size='sm' >
                     <Button variant="light" onClick={decrease}>-</Button>
-                    <Button variant="light" className='amount button'>{item.count}</Button>
+                    <Button variant="light" className='amount button'>{cache[item.id]}</Button>
                     <Button variant="light" onClick={increase}>+</Button>
                 </ButtonGroup>
-                <div className='mx-5 px-5'>{symbol}{item.total}</div>
+                <div className='mx-5 px-5'>{symbol}{Number(item.price) * Number(cache[item.id])}</div>
             </div>
         </div>
     )

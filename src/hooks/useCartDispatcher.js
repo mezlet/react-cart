@@ -15,15 +15,14 @@ const useCartDispatcher = () => {
 	const { cartDispatch, cartState: state } = useGlobalContext();
 
 	return {
-		cartDispatch,
 		...state,
-		increase: id => increaseCount(id, cartDispatch, state.cart),
-		decrease: id => decreaseCount(id, cartDispatch, state.cart, state.showDrawer),
-		toggleDrawer: () => drawerToggle(cartDispatch),
-		addItem: item => addItem(item, state.cart, cartDispatch, state.showDrawer),
-		subTotal: () => subTotal(state.cart, cartDispatch),
+		increase: id => increaseCount(id, cartDispatch, state.cache),
+		decrease: id => decreaseCount(id, cartDispatch, state.cart, state.cache, state.showDrawer),
+		toggleDrawer: () => drawerToggle(state.showDrawer, cartDispatch),
+		addItem: item => addItem(item, state.cart, state.cache, cartDispatch, state.showDrawer),
+		subTotal: () => subTotal(state.cart, state.cache, cartDispatch),
 		removeItem: (id) => deleteItem(id, state.cart, cartDispatch, state.showDrawer),
-		getProducts: (data) => getProducts(data, cartDispatch ),
+		getProducts: (data) => getProducts(data, state.cache, cartDispatch ),
 		changeCurrency: (currency) => changeCurrency(currency, cartDispatch )
 	};
 };
