@@ -6,17 +6,14 @@ export const cartInitialState = {
     total: 0,
     currency: 'USD',
     currencies: [],
-    cache: {}
+    cache: {},
+    error: false
 }
 
 
 export const cartReducer = (state= cartInitialState, action) => {
     switch(action.type) {
         case types.TOGGLE_DRAWER: 
-            return {
-                ...state,
-                showDrawer: !state.showDrawer
-            }
         case types.INCREASE:
         case types.PRODUCT_LIST:
         case types.ADD_ITEM:

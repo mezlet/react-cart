@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import './base';
-@import "../components/presentation/BackDrop/backdrop";
-@import "../components/containers/Cart/cart";
-@import "../components/containers/Drawer/drawer";
-@import '../components/presentation/DrawerFooter/drawerFooter';
-@import '../components/presentation/DrawerHeader/drawerHeader';
+@import "../components/BackDrop/backdrop";
+@import "../view/Cart/cart";
+@import "../view/Drawer/drawer";
+@import '../components/DrawerFooter/drawerFooter';
+@import '../components/DrawerHeader/drawerHeader';

@@ -21,9 +21,9 @@ const useCartDispatcher = () => {
 		toggleDrawer: () => drawerToggle(state.showDrawer, cartDispatch),
 		addItem: item => addItem(item, state.cart, state.cache, cartDispatch, state.showDrawer),
 		subTotal: () => subTotal(state.cart, state.cache, cartDispatch),
-		removeItem: (id) => deleteItem(id, state.cart, cartDispatch, state.showDrawer),
-		getProducts: (data) => getProducts(data, state.cache, cartDispatch ),
-		changeCurrency: (currency) => changeCurrency(currency, cartDispatch )
+		removeItem: id => deleteItem(id, state.cart, cartDispatch, state.showDrawer),
+		getProducts: data => getProducts(data, state.cache, cartDispatch),
+		changeCurrency: currency => changeCurrency(currency, cartDispatch)
 	};
 };
 

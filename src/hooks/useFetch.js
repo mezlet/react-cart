@@ -5,19 +5,25 @@ import { useCartDispatcher } from './useCartDispatcher';
 
 export const useFetch = () => {
 	const { currency, getProducts } = useCartDispatcher();
-	const { loading, data, error } = useQuery(
+	const response = useQuery(
 		gql`
 			${Queries.FETCH_PRODUCTS(currency)}
 		`
 	);
+	const { loading, data, error } = response;
+
+	useEffect(() => {
+		if (error) {
+			getProducts({ error: error ? true : false });
+		}
+	}, [error]);
 
 	useEffect(() => {
 		if (data) {
-			const { products, currency: currencies } = data;
-			getProducts({ products, currencies, currency });
+			const { products, currency: currencies, error } = data;
+			getProducts({ products, currencies, currency, error: error ? true : false });
 		}
-	}, [data, currency]);
-	
-	
+	}, [data, currency, error]);
+
 	return { loading, error };
 };

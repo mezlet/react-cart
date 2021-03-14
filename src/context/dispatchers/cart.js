@@ -77,11 +77,11 @@ export const deleteItem = (id, cart, cartDispatch, showDrawer) => {
 	return cartDispatch(removeItem({ cart: newCart, showDrawer: !showDrawer }));
 };
 
-export const drawerToggle = (showDrawer, cartDispatch) => cartDispatch(toggleDrawer({ showDrawer: !showDrawer }));
+export const drawerToggle = (showDrawer, cartDispatch) => cartDispatch(toggleDrawer({ showDrawer: !showDrawer, error: false }));
 
 export const getProducts = (data, cache, cartDispatch) => {
 	const cartItems = Object.keys(cache);
-	if(cartItems.length > 0) {
+	if(!data.error && cartItems.length > 0) {
 		data.cart = data.products.filter(item => cartItems.includes(`${item.id}`));
 	}
 	return cartDispatch(productList(data));

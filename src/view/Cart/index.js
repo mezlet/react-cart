@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useCartDispatcher } from '../../../hooks/useCartDispatcher';
 import CartHeader from './CartHeader';
 import CartContainer from './CartContainer';
 import { Container } from 'react-bootstrap';
+import { useCartDispatcher } from '../../hooks/useCartDispatcher';
 
 const Cart = () => {
 	const { cart, subTotal, cache } = useCartDispatcher();

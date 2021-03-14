@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AddItemButton from '../AddItemButton';
+import AddItemButton from '../../components/AddItemButton';
 
 const CartItem = ({ item, addItem, symbol }) => {
 	return (

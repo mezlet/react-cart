@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ToastContainer } from 'react-toastify';
 import './scss/index.scss';
-import App from './components/containers/App';
+import App from './view/App';
 import reportWebVitals from './reportWebVitals';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   ApolloProvider,
   ApolloClient,
@@ -22,6 +24,17 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
+    <ToastContainer 
+      position='top-center'
+			autoClose={5000}
+			hideProgressBar={false}
+			newestOnTop={false}
+			closeOnClick
+			rtl={false}
+			pauseOnFocusLoss
+			draggable
+			pauseOnHover 
+    />
   </ApolloProvider>,
   document.getElementById('root')
 );

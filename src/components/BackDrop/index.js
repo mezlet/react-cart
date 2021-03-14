@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const BackDrop = ({toggleDrawer}) => {
+    
     return <div className = 'backdrop' onClick={toggleDrawer}/>
 }
 

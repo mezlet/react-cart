@@ -1,12 +1,13 @@
 import React from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import SelectedItems from '../../presentation/SelectedItems';
-import { useCartDispatcher } from '../../../hooks/useCartDispatcher';
-import DrawerHeader from '../../presentation/DrawerHeader';
-import CurrencySelector from '../../presentation/CurrencySelector';
-import DrawerFooter from '../../presentation/DrawerFooter';
-import Loader from '../../presentation/Loader';
-import { useFetch } from '../../../hooks/useFetch';
+import SelectedItems from '../../components/SelectedItems';
+import DrawerHeader from '../../components/DrawerHeader';
+import CurrencySelector from '../../components/CurrencySelector';
+import DrawerFooter from '../../components/DrawerFooter';
+import Loader from '../../components/Loader';
+import { useFetch } from '../../hooks/useFetch';
+import { useCartDispatcher } from '../../hooks/useCartDispatcher';
+import useToaster from '../../hooks/useToaster';
 
 const Drawer = () => {
 	const { loading } = useFetch();
@@ -21,8 +22,10 @@ const Drawer = () => {
 		currency,
 		currencies,
 		removeItem,
-		changeCurrency
+		changeCurrency,
+		error
 	} = useCartDispatcher();
+	const {showError} = useToaster();
 
 	const symbol = getSymbolFromCurrency(currency);
 
