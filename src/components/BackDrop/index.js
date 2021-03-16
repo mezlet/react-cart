@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const BackDrop = ({toggleDrawer}) => {
     
-    return <div className = 'backdrop' onClick={toggleDrawer}/>
+    return <div data-test='overlay' className = 'backdrop' onClick={toggleDrawer}/>
 }
 
 BackDrop.propTypes = {

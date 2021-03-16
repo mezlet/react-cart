@@ -4,7 +4,7 @@ import {Button} from 'react-bootstrap'
 
 const AddItemButton = ({click}) => {
     return (
-        <Button className="mt-2 mx-3 custom-green" size="md" onClick={click}>Add to cart</Button>
+        <Button data-test='add-item-button' className="mt-2 mx-3 custom-green" size="md" onClick={click}>Add to cart</Button>
     )
 }
 

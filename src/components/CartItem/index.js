@@ -4,7 +4,7 @@ import AddItemButton from '../../components/AddItemButton';
 
 const CartItem = ({ item, addItem, symbol }) => {
 	return (
-		<div className='d-flex justify-content-center '>
+		<div className='d-flex justify-content-center ' data-test='cart-div'>
             <div className='my-3 '>
                 <img src={item.image_url} alt='' width="125" height="100" className='m-5' />
                 <div  className='text-center'>

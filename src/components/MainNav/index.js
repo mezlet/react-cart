@@ -5,7 +5,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 const MainNav = ({ cart, toggleDrawer }) => {
 	return (
 		<div className='f-12'>
-			<Navbar bg='' variant='' className='border-bottom'>
+			<Navbar bg='' variant='' className='border-bottom' data-test='main-nav-bar'>
 				<Navbar.Brand href='#' className='text-secondary l-3'>
 					LUMIN
 				</Navbar.Brand>
@@ -17,13 +17,11 @@ const MainNav = ({ cart, toggleDrawer }) => {
 						Learn
 					</Nav.Link>
 				</Nav>
-				{/* <Nav> */}
-					<div className='text-secondary'>
-						<span className='mx-3'>Account</span>
-						<i className='fas fa-shopping-cart cursor' onClick={toggleDrawer}></i>
-						<span className='mt-n5 pt-n3'>{cart.length}</span>
-					</div>
-				{/* </Nav> */}
+				<div className='text-secondary'>
+					<span className='mx-3'>Account</span>
+					<i className='fas fa-shopping-cart cursor' onClick={toggleDrawer} data-test='cart-icon'></i>
+					<span className='mt-n5 pt-n3'>{cart.length}</span>
+				</div>
 			</Navbar>
 		</div>
 	);
@@ -32,6 +30,6 @@ const MainNav = ({ cart, toggleDrawer }) => {
 MainNav.propTypes = {
 	cart: PropTypes.array.isRequired,
 	toggleDrawer: PropTypes.func.isRequired
-}
+};
 
 export default MainNav;

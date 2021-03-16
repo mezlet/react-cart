@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const CurrencySelector = ({ currency, currencies, changeCurrency }) => {
 	return (
-		<select onChange={e => changeCurrency(e.target.value)}>
+		<select onChange={e => changeCurrency(e.target.value)} data-test='item-selector'>
 			<option value={currency}>
 				{currency}
 			</option>

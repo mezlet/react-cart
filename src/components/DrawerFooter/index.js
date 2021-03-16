@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap';
 const DrawerFooter = ({ symbol, total }) => {
 	return (
 		<div className='drawer_footer px-3 py-3'>
-			<div className='d-flex justify-content-between'>
+			<div className='d-flex justify-content-between' data-test='subtotal-div'>
                 <span >SubTotal:</span>
                 <span className='px-5'>{symbol}{total}</span>
 			</div>
